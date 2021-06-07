@@ -20,10 +20,9 @@ class CategoryController extends Controller
             'name' => 'required|min:3|max:21|unique:categories',
         ]);
 
-        Category::insert([
-            'name' => $request->name,
-            'user_id' => Auth::user()->id,
-            'created_at' => Carbon::now()
-        ]);
+        $category = new Category;
+        $category->name=$request->name;
+        $category->user_id=Auth::user()->id;
+        $category->save();
     }
 }
