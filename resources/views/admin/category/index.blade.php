@@ -24,10 +24,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @php($i=1)
+
                                 @foreach($categories as $category)
                                 <tr>
-                                    <th scope="row">{{ $i++ }}</th>
+                                    <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->user_id }}</td>
                                     <td>
@@ -39,9 +39,9 @@
                                     </td>
                                 </tr>
                                 @endforeach
-
                                 </tbody>
                             </table>
+                            {{ $categories->links() }}
                         </div>
                     </div>
                     <div class="col-md-4">
