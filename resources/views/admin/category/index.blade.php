@@ -14,6 +14,7 @@
                             <div class="card-header text-secondary">
                                 All Category
                             </div>
+                            <div class="card-body">
                             <table class="table">
                                 <thead>
                                 <tr class="table-success">
@@ -21,6 +22,7 @@
                                     <th scope="col">Category Name</th>
                                     <th scope="col">Created User</th>
                                     <th scope="col">Created At</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -34,14 +36,19 @@
                                         @if($category->created_at == NULL)
                                             <span class="text-secondary">No Date issued</span>
                                         @else
-                                        {{ Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
+                                        {{ $category->created_at->diffForHumans() }}
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ url('category/edit/'.$category->id) }}" class="btn btn-info">Edit</a>
+                                        <a href="{{ url('category/delete/'.$category->id) }}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                             {{ $categories->links() }}
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">

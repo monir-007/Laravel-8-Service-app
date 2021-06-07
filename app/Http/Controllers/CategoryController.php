@@ -5,19 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Auth;
-use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-//        $categories = Category::latest()->paginate(5);
-
-        $categories=DB::table('categories')
-            ->join('users', 'categories.user_id','users.id')
-            ->select('categories.*','users.name')
-            ->latest()->paginate(5);
-
+        $categories = Category::latest()->paginate(5);
         return view('admin.category.index', compact('categories'));
     }
 
@@ -33,5 +26,21 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect()->back()->with('success', 'Category created successfully!');
+    }
+
+    public function edit($id)
+    {
+        $categories = Category::find($id);
+        return view('admin.category.edit', compact('categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = Category::find($id)->update([
+            'name'=>$request->name,
+            'user_id'=>Auth::user()->id
+        ]);
+
+        return redirect()->route('index.category')->with('success', 'Category updated successfully!');
     }
 }
