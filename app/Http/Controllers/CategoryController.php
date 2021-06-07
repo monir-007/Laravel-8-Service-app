@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -19,10 +19,10 @@ class CategoryController extends Controller
             'name' => 'required|min:3|max:21|unique:categories',
         ]);
 
-        $category = new Category;
-        $category->name=$request->name;
-        $category->user_id=Auth::user()->id;
-        $category->save();
+        $data = [];
+        $data['name'] = $request->name;
+        $data['user_id'] = Auth::user()->id;
+        DB::table('categories')->insert($data);
 
         return redirect()->back()->with('success', 'Category created successfully!');
     }
