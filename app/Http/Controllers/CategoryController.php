@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Auth;
-use Illuminate\Support\Carbon;
 
 class CategoryController extends Controller
 {
@@ -24,5 +23,7 @@ class CategoryController extends Controller
         $category->name=$request->name;
         $category->user_id=Auth::user()->id;
         $category->save();
+
+        return redirect()->back()->with('success', 'Category created successfully!');
     }
 }

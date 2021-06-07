@@ -36,6 +36,14 @@
                         </div>
                     </div>
                     <div class="col-md-4">
+                        @if(session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <div class="card">
                             <div class="card-header bg-secondary text-light">
                                 Add Category
@@ -44,7 +52,8 @@
                                 <form action="{{route('save.category')}}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <input name="name" type="text" class="form-control" placeholder="Category Name"/>
+                                        <input name="name" type="text" class="form-control"
+                                               placeholder="Category Name"/>
                                         @error('name')
                                         <span class="text-danger">*{{ $message }}</span>
                                         @enderror
