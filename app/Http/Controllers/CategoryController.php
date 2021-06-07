@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Auth;
-use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.category.index');
+        $categories = Category::latest()->get();
+        return view('admin.category.index', compact('categories'));
     }
 
     public function save(Request $request)
@@ -19,10 +20,10 @@ class CategoryController extends Controller
             'name' => 'required|min:3|max:21|unique:categories',
         ]);
 
-        $data = [];
-        $data['name'] = $request->name;
-        $data['user_id'] = Auth::user()->id;
-        DB::table('categories')->insert($data);
+        $category = new Category;
+        $category->name = $request->name;
+        $category->user_id = Auth::user()->id;
+        $category->save();
 
         return redirect()->back()->with('success', 'Category created successfully!');
     }
