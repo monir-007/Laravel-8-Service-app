@@ -85,7 +85,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group mt-3">
-                                        <input name="image" type="file"  class="form-control"
+                                        <input name="image" type="file" class="form-control"
                                                placeholder="Image Select"/>
                                         @error('image')
                                         <span class="text-danger">*{{ $message }}</span>
