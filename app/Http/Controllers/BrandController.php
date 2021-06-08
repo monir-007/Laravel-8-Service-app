@@ -73,4 +73,14 @@ class BrandController extends Controller
         ]);
         return redirect()->back()->with('success', 'Brand updated successfully!');
     }
+
+    public function delete($id)
+    {
+        $image = Brand::find($id);
+        $old_image = $image->image;
+        unlink($old_image);
+
+        Brand::find($id)->delete();
+        return redirect()->back()->with('success', 'Brand deleted successfully!');
+    }
 }

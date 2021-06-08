@@ -36,6 +36,7 @@ Route::get('/brand/index',[BrandController::class, 'index'])->name('index.brand'
 Route::post('/brand/save', [BrandController::class, 'save'])->name('save.brand');
 Route::get('/brand/edit/{id}',[BrandController::class, 'edit']);
 Route::post('/brand/update/{id}',[BrandController::class, 'update']);
+Route::get('/brand/delete/{id}',[BrandController::class, 'delete']);
 
 //dashboard login route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
