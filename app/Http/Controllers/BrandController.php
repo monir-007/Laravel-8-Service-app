@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use function Livewire\str;
+use Intervention\Image\Facades\Image;
+
 
 class BrandController extends Controller
 {
@@ -23,12 +24,9 @@ class BrandController extends Controller
         ]);
         $brand_image = $request->file('image');
 
-        $name_gen = hexdec(uniqid());
-        $image_ext = strtolower($brand_image->getClientOriginalExtension());
-        $image_name = $name_gen . '.' . $image_ext;
-        $uploadLocation = 'image/brand/';
-        $last_image = $uploadLocation . $image_name;
-        $brand_image->move($uploadLocation, $image_name);
+        $name_gen = hexdec(uniqid()).'.'.$brand_image->getClientOriginalExtension();
+        Image::make($brand_image)->resize(300, 200)->save('image/brand/'.$name_gen);
+        $last_image = 'image/brand/'.$name_gen;
 
         $brand = new Brand();
         $brand->name = $request->name;
