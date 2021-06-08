@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Category Routes
+
 Route::get('/category/index', [CategoryController::class, 'index'])->name('index.category');
 Route::post('/category/save', [CategoryController::class, 'save'])->name('save.category');
 Route::get('/category/edit/{id}',[CategoryController::class, 'edit']);
@@ -28,8 +30,12 @@ Route::get('/category/softDelete/{id}',[CategoryController::class, 'softDelete']
 Route::get('/category/restore/{id}',[CategoryController::class, 'restoreCategory']);
 Route::get('/category/delete/{id}',[CategoryController::class, 'deleteCategory']);
 
-Route::get('/brand/index',[BrandController::class, 'index'])->name('index.brand');
+//Brand Routes
 
+Route::get('/brand/index',[BrandController::class, 'index'])->name('index.brand');
+Route::post('/brand/save', [BrandController::class, 'save'])->name('save.brand');
+
+//dashboard login route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $users = User::all();
     return view('dashboard', compact('users'));

@@ -29,9 +29,11 @@
 
                                     @foreach($brands as $brand)
                                         <tr>
-                                            <th scope="row">{{ $categories->firstItem()+$loop->index }}</th>
+                                            <th scope="row">{{ $brands->firstItem()+$loop->index }}</th>
                                             <td>{{ $brand->name }}</td>
-                                            <td><img src="" alt=""></td>
+                                            <td><img src="{{ asset($brand->image) }}"
+                                                     style="height: 50px; width:60px;"
+                                                     alt=""></td>
                                             <td>
                                                 @if($brand->created_at == NULL)
                                                     <span
@@ -66,12 +68,14 @@
                                 </button>
                             </div>
                         @endif
+
                         <div class="card">
                             <div class="card-header bg-secondary text-light">
                                 Add Brand
                             </div>
                             <div class="card-body">
-                                <form action="{{route('save.category')}}" method="POST">
+                                <form action="{{ route('save.brand') }}" method="POST"
+                                      enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
                                         <input name="name" type="text" class="form-control"
@@ -81,7 +85,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group mt-3">
-                                        <input type="file" name="image" class="form-control"
+                                        <input name="image" type="file"  class="form-control"
                                                placeholder="Image Select"/>
                                         @error('image')
                                         <span class="text-danger">*{{ $message }}</span>
@@ -90,7 +94,6 @@
                                     <button type="submit" class="mt-2 btn btn-primary">Add</button>
                                 </form>
                             </div>
-
 
                         </div>
                     </div>
