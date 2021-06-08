@@ -38,8 +38,8 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $data = Category::find($id)->update([
-            'name'=>$request->name,
-            'user_id'=>Auth::user()->id
+            'name' => $request->name,
+            'user_id' => Auth::user()->id
         ]);
 
         return redirect()->route('index.category')->with('success', 'Category updated successfully!');
@@ -56,5 +56,12 @@ class CategoryController extends Controller
         $delete = Category::withTrashed()->find($id)->restore();
 
         return redirect()->back()->with('success', 'Data restored');
+    }
+
+    public function deleteCategory($id)
+    {
+        $delete = Category::onlyTrashed()->find($id)->forceDelete();
+
+        return redirect()->back()->with('success', 'Category deleted Permanently');
     }
 }
