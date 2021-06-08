@@ -26,8 +26,11 @@
                                 Edit Brand
                             </div>
                             <div class="card-body">
-                                <form action="{{ url('brand/update/'.$brands->id) }}" method="POST">
+                                <form action="{{ url('brand/update/'.$brands->id) }}"
+                                      method="POST" enctype="multipart/form-data">
                                     @csrf
+                                    <input type="hidden" name="oldImage" value="{{ $brands->image
+                                    }}">
                                     <div class="form-group">
                                         <input name="name" value="{{ $brands->name }}" type="text"
                                                class="form-control"
