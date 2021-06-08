@@ -24,6 +24,11 @@
                     ('index.brand')">
                         Brands
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('index.multiImage') }}" :active="request()
+                    ->routeIs
+                    ('index.multiImage')">
+                        Images
+                    </x-jet-nav-link>
                 </div>
             </div>
 

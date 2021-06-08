@@ -81,4 +81,5 @@ class BrandController extends Controller
         Brand::find($id)->delete();
         return redirect()->back()->with('success', 'Brand deleted successfully!');
     }
+
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MultiImageController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,6 @@ Route::get('/', function () {
 });
 
 //Category Routes
-
 Route::get('/category/index', [CategoryController::class, 'index'])->name('index.category');
 Route::post('/category/save', [CategoryController::class, 'save'])->name('save.category');
 Route::get('/category/edit/{id}',[CategoryController::class, 'edit']);
@@ -31,12 +31,15 @@ Route::get('/category/restore/{id}',[CategoryController::class, 'restoreCategory
 Route::get('/category/delete/{id}',[CategoryController::class, 'deleteCategory']);
 
 //Brand Routes
-
 Route::get('/brand/index',[BrandController::class, 'index'])->name('index.brand');
 Route::post('/brand/save', [BrandController::class, 'save'])->name('save.brand');
 Route::get('/brand/edit/{id}',[BrandController::class, 'edit']);
 Route::post('/brand/update/{id}',[BrandController::class, 'update']);
 Route::get('/brand/delete/{id}',[BrandController::class, 'delete']);
+
+//Multi-Image Routes
+Route::get('/multiple/image/',[MultiImageController::class,'index'])->name('index.multiImage');
+Route::post('/multiple/image/save',[MultiImageController::class,'save'])->name('save.multiImage');
 
 //dashboard login route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
