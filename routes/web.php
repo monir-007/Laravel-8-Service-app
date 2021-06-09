@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultiImageController;
+use App\Models\Brand;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $brands = Brand::all();
+    return view('index', compact('brands'));
 });
 
 //Category Routes

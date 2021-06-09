@@ -632,7 +632,7 @@
     <div class="row">
         <div class="col-xl-5">
             <!-- New Customers -->
-            <div class="card card-table-border-none" data-scroll-height="580">
+            <div class="card card-table-border-none" data-scroll-height="500">
                 <div class="card-header justify-content-between ">
                     <h2>New Customers</h2>
                     <div>
@@ -680,7 +680,7 @@
                                 <div class="media">
                                     <div class="media-image mr-3 rounded-circle">
                                         <a href="profile.html"><img class="rounded-circle w-45"
-                                                                    src="assets/img/user/u2.jpg"
+                                                                    src="{{asset('admin/assets/img/user/u2.jpg')}}"
                                                                     alt="customer image"></a>
                                     </div>
                                     <div class="media-body align-self-center">
@@ -699,7 +699,7 @@
                                 <div class="media">
                                     <div class="media-image mr-3 rounded-circle">
                                         <a href="profile.html"><img class="rounded-circle w-45"
-                                                                    src="assets/img/user/u3.jpg"
+                                                                    src="{{asset('admin/assets/img/user/u3.jpg')}}"
                                                                     alt="customer image"></a>
                                     </div>
                                     <div class="media-body align-self-center">
@@ -713,44 +713,6 @@
                             <td>1 Order</td>
                             <td class="text-dark d-none d-md-block">$50</td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="media-image mr-3 rounded-circle">
-                                        <a href="profile.html"><img class="rounded-circle w-45"
-                                                                    src="assets/img/user/u4.jpg"
-                                                                    alt="customer image"></a>
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <a href="profile.html"><h6
-                                                class="mt-0 text-dark font-weight-medium">Albrecht
-                                                Straub</h6></a>
-                                        <small>@albrech.as</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>2 Orders</td>
-                            <td class="text-dark d-none d-md-block">$100</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="media">
-                                    <div class="media-image mr-3 rounded-circle">
-                                        <a href="profile.html"><img class="rounded-circle w-45"
-                                                                    src="assets/img/user/u5.jpg"
-                                                                    alt="customer image"></a>
-                                    </div>
-                                    <div class="media-body align-self-center">
-                                        <a href="profile.html"><h6
-                                                class="mt-0 text-dark font-weight-medium">Leopold Ebert</h6>
-                                        </a>
-                                        <small>@leopold.et</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>1 Order</td>
-                            <td class="text-dark d-none d-md-block">$60</td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -758,7 +720,7 @@
         </div>
         <div class="col-xl-7">
             <!-- Top Products -->
-            <div class="card card-default" data-scroll-height="580">
+            <div class="card card-default" data-scroll-height="500">
                 <div class="card-header justify-content-between mb-4">
                     <h2>Top Products</h2>
                     <div>
@@ -783,7 +745,7 @@
                 <div class="card-body py-0">
                     <div class="media d-flex mb-5">
                         <div class="media-image align-self-center mr-3 rounded">
-                            <a href="#"><img src="assets/img/products/p1.jpg" alt="customer image"></a>
+                            <a href="#"><img src="{{asset('admin/assets/img/products/p1.jpg')}}" alt="customer image"></a>
                         </div>
                         <div class="media-body align-self-center">
                             <a href="#"><h6 class="mb-3 text-dark font-weight-medium"> Coach Swagger</h6>
@@ -800,7 +762,7 @@
 
                     <div class="media d-flex mb-5">
                         <div class="media-image align-self-center mr-3 rounded">
-                            <a href="#"><img src="assets/img/products/p2.jpg" alt="customer image"></a>
+                            <a href="#"><img src="{{asset('admin/assets/img/products/p2.jpg')}}" alt="customer image"></a>
                         </div>
                         <div class="media-body align-self-center">
                             <a href="#"><h6 class="mb-3 text-dark font-weight-medium"> Coach Swagger</h6>
@@ -811,22 +773,6 @@
                             <p class="mb-0">
                                 <del>$300</del>
                                 <span class="text-dark ml-3">$250</span>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="media d-flex mb-5">
-                        <div class="media-image align-self-center mr-3 rounded">
-                            <a href="#"><img src="assets/img/products/p3.jpg" alt="customer image"></a>
-                        </div>
-                        <div class="media-body align-self-center">
-                            <a href="#"><h6 class="mb-3 text-dark font-weight-medium"> Gucci Watch</h6></a>
-                            <p class="float-md-right"><span class="text-dark mr-2">10</span>Sales</p>
-                            <p class="d-none d-md-block">Statement belting with double-turnlock hardware
-                                adds “swagger” to a simple.</p>
-                            <p class="mb-0">
-                                <del>$300</del>
-                                <span class="text-dark ml-3">$50</span>
                             </p>
                         </div>
                     </div>
