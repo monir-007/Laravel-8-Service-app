@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultiImageController;
@@ -43,11 +44,13 @@ Route::post('/multiple/image/save',[MultiImageController::class,'save'])->name('
 
 //dashboard login route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    $users = User::all();
-    return view('dashboard', compact('users'));
+//    $users = User::all();
+    return view('admin.index');
 })->name('dashboard');
 
 //Verify Email Notice
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
+
+Route::get('user/logout',[UserController::class, 'logout'])->name('user.logout');
