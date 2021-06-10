@@ -50,8 +50,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="sidenav-item-link" href="analytics.html">
-                                    <span class="nav-text">Images</span>
+                                <a class="sidenav-item-link" href="{{route('index.slider')}}">
+                                    <span class="nav-text">Slider </span>
                                 </a>
                             </li>
                         </div>

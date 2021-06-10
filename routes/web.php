@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultiImageController;
+use App\Http\Controllers\SliderController;
 use App\Models\Brand;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -44,9 +45,16 @@ Route::get('/brand/delete/{id}',[BrandController::class, 'delete']);
 Route::get('/multiple/image/',[MultiImageController::class,'index'])->name('index.multiImage');
 Route::post('/multiple/image/save',[MultiImageController::class,'save'])->name('save.multiImage');
 
+//Slider Routes
+Route::get('/slider/',[SliderController::class, 'index'])->name('index.slider');
+Route::post('/slider/new',[SliderController::class, 'saveNew'])->name('save.slider');
+Route::get('/slider/edit/{id}',[SliderController::class, 'edit']);
+Route::post('/slider/update/{id}',[SliderController::class, 'update']);
+
+
 //dashboard login route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//    $users = User::all();
+    //    $users = User::all();
     return view('admin.index');
 })->name('dashboard');
 
