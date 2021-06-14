@@ -54,6 +54,11 @@
                                     <span class="nav-text">Slider </span>
                                 </a>
                             </li>
+                            <li>
+                                <a class="sidenav-item-link" href="{{route('index.aboutUs')}}">
+                                    <span class="nav-text">About Us </span>
+                                </a>
+                            </li>
                         </div>
                     </ul>
                 </li>
