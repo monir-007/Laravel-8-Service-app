@@ -50,6 +50,7 @@ Route::get('/slider/',[SliderController::class, 'index'])->name('index.slider');
 Route::post('/slider/new',[SliderController::class, 'saveNew'])->name('save.slider');
 Route::get('/slider/edit/{id}',[SliderController::class, 'edit']);
 Route::post('/slider/update/{id}',[SliderController::class, 'update']);
+Route::get('/slider/delete/{id}',[SliderController::class, 'delete']);
 
 
 //dashboard login route

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Slider;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -47,23 +47,25 @@ class SliderController extends Controller
     {
         $this->validate($request,[
             'title' => 'required',
-            'description'=>'required',
             'image' => 'required|mimes:jpg,jpeg,png',
         ]);
 
-        $oldImage = $request->oldImage;
-        $sliderImage = $request->file('image');
-        if($sliderImage)
-        {
-            $nameGenerator = hexdec(uniqid()).'.'.$sliderImage->getClientOriginalExtension();
-            Image::make($sliderImage)->resize(1920, 1088)->save('image/slider/'.$nameGenerator);
-            $lastImage = 'image/slider/'.$nameGenerator;
+        $old_image = $request->oldImage;
+        $slider_image = $request->file('image');
+        if ($slider_image) {
+            $name_gen = hexdec(uniqid());
+            $image_ext = strtolower($slider_image->getClientOriginalExtension());
+            $image_name = $name_gen . '.' . $image_ext;
+            $uploadLocation = 'image/slider/';
+            $last_image = $uploadLocation . $image_name;
+            $slider_image->move($uploadLocation, $image_name);
 
-            unlink($oldImage);
+            unlink($old_image);
+
             Slider::find($id)->update([
                 'title'=>$request->title,
                 'description'=>$request->description,
-                'image'=>$lastImage,
+                'image'=>$last_image,
                 'created_at'=>Carbon::now()
             ]);
             return redirect()->route('index.slider')->with('success', 'Slider updated successfully!');
@@ -71,8 +73,17 @@ class SliderController extends Controller
         }
         Slider::find($id)->update([
             'title'=>$request->title,
-            'description'=>$request->description
+            'description'=>$request->description,
+            'updated_at' => Carbon::now()
         ]);
         return redirect()->route('index.slider')->with('success', 'Slider updated successfully!');
+    }
+    public function delete($id){
+        $data = Slider::find($id);
+        $oldImage = $data->image;
+        unlink($oldImage);
+
+        Slider::find($id)->delete();
+        return redirect()->back()->with('success', 'Slider deleted successfully.');
     }
 }

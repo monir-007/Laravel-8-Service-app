@@ -29,7 +29,7 @@
                                 </div>
                             @endif
                             <div class="card-body">
-                                <table class="table table-striped table-fixed">
+                                <table id="dataTable" class="table table-striped table-fixed">
                                     <thead>
                                     <tr class="table-success">
                                         <th scope="col">#</th>
@@ -69,13 +69,13 @@
                                                     <ul class="dropdown-menu dropdown-menu-right"
                                                         aria-labelledby="dropdown-recent-order1">
                                                         <li class="dropdown-item">
-                                                            {{--                                                            <a href="{{ url('slider/edit/'.$slider->id) }}">Edit</a>--}}
-                                                            <button class="btn-sm btn-success" data-toggle="modal"
-                                                                    data-target="#sliderEditModal">Edit
-                                                            </button>
+                                                     <a href="{{ url('slider/edit/'.$slider->id) }}" class="btn-sm btn-success" >Edit</a>
+{{--                                                            <button  data-toggle="modal" data-target="#sliderEditModal"--}}
+{{--                                                                    >Edit--}}
+{{--                                                            </button>--}}
                                                         </li>
                                                         <li class="dropdown-item">
-                                                            <a href="{{ url('slider/delete/'.$slider->id) }}"
+                                                            <a href="{{ url('slider/delete/'.$slider->id) }}" onclick="return confirm('Are you sure you want to delete this?')"
                                                                class="btn-sm btn-danger text-light">Remove</a>
                                                         </li>
                                                     </ul>
@@ -148,24 +148,46 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="sliderEditModal" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalFormTitle" aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalFormTitle">Edit Slider</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            @include('admin.slider.edit')
-                        </div>
+{{--            <div class="modal fade" id="sliderEditModal" tabindex="-1" role="dialog"--}}
+{{--                 aria-labelledby="exampleModalFormTitle" aria-hidden="true">--}}
+{{--                <div class="modal-dialog modal-lg" role="document">--}}
+{{--                    <div class="modal-content">--}}
+{{--                        <div class="modal-header">--}}
+{{--                            <h5 class="modal-title" id="exampleModalFormTitle">Edit Slider</h5>--}}
+{{--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                                <span aria-hidden="true">&times;</span>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-body">--}}
+{{--                            @include('admin.slider.edit')--}}
+{{--                        </div>--}}
 
-                    </div>
-                </div>
-            </div>
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </div>
 
 @endsection
+
+<script type="text/javascript">
+    $(document).ready(function (){
+        var table = $('#dataTable').DataTable();
+        table.on('click', '.edit', function (){
+            let $tr = $(this).closest('tr');
+            if($($tr).hasClass('child')){
+                $tr = $tr.prev('.parent');
+            }
+            let data = table.row($tr).data();
+            console.log(data);
+
+            $('#title').val(data[1]);
+            $('#description').val(data[2]);
+            $('#image').val(data[3]);
+
+            $('#editForm').attr('action','slider/update'+data[0]);
+            $('#sliderEditModal').modal('show');
+        });
+    });
+
+</script>
