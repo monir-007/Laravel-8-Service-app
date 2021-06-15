@@ -4,11 +4,15 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\admin\UpdateProfileController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MultiImageController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SliderController;
 use App\Models\AboutUs;
 use App\Models\Brand;
+use App\Models\MultiImage;
 use App\Models\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +32,8 @@ Route::get('/', function () {
     $brands = Brand::all();
     $abouts= AboutUs::first();
     $services=Services::all();
-    return view('index', compact('brands','abouts', 'services'));
+    $images=MultiImage::all();
+    return view('index', compact('brands','abouts', 'services', 'images'));
 });
 
 //Category Routes
@@ -66,12 +71,25 @@ Route::post('/about-us/update/{id}', [AboutUsController::class, 'update']);
 Route::get('/about-us/delete/{id}', [AboutUsController::class, 'delete']);
 
 //Services Routes
-Route::get('services/',[ServicesController::class, 'index'])->name('index.services');
-Route::post('services/new',[ServicesController::class, 'saveNew'])->name('save.services');
+Route::get('/services/',[ServicesController::class, 'index'])->name('index.services');
+Route::post('/services/new',[ServicesController::class, 'saveNew'])->name('save.services');
 Route::get('/services/edit/{id}', [ServicesController::class, 'edit']);
 Route::post('/services/update/{id}', [ServicesController::class, 'update']);
 Route::get('/services/delete/{id}', [ServicesController::class, 'delete']);
 
+//Portfolio Routes
+Route::get('/portfolio/',[PortfolioController::class, 'index'])->name('portfolio');
+
+//Contact Routes
+Route::get('/contact',[ContactController::class, 'viewContact'])->name('contact');
+Route::post('/contact/message',[ContactController::class, 'contactMessage'])->name('message.contact');
+Route::get('/contact/admin',[ContactController::class, 'index'])->name('index.contact');
+Route::post('/contact/new/admin',[ContactController::class, 'saveNew'])->name('save.contact');
+Route::get('/contact/edit/{id}', [ContactController::class, 'edit']);
+Route::post('/contact/update/{id}', [ContactController::class, 'update']);
+Route::get('/contact/delete/{id}', [ContactController::class, 'delete']);
+Route::get('/contact/message/admin', [ContactController::class, 'message'])->name('contactMessage');
+Route::get('/contact/message/delete/{id}', [ContactController::class, 'deleteMessage']);
 
 //dashboard login route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -85,3 +103,11 @@ Route::get('/email/verify', function () {
 })->middleware('auth')->name('verification.notice');
 
 Route::get('user/logout', [UserController::class, 'logout'])->name('user.logout');
+
+//Change Password Routes
+Route::get('/user/password',[UpdateProfileController::class, 'changePassword'])->name('change.password');
+Route::post('/user/password/update',[UpdateProfileController::class, 'updatePassword'])->name('update.password');
+
+//Update profile Routes
+Route::get('/user/profile/',[UpdateProfileController::class, 'updateProfile'])->name('update.profile');
+Route::post('/user/profile/update',[UpdateProfileController::class, 'updateProfileNew'])->name('update.profile.new');

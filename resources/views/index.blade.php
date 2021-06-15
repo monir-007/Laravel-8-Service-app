@@ -1,4 +1,7 @@
 @extends('layouts.main-layout')
+<!-- ======= Hero Section ======= -->
+@include('layouts.component._hero-section')
+<!-- End Hero -->
 
 @section('main-layout')
 
@@ -51,7 +54,6 @@
                 @endforeach
             </div>
             @endforeach
-
         </div>
     </section><!-- End Services Section -->
 

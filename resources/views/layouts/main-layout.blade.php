@@ -44,10 +44,6 @@
     @include('layouts.component._header')
 </header><!-- End Header -->
 
-<!-- ======= Hero Section ======= -->
-@include('layouts.component._hero-section')
-<!-- End Hero -->
-
 <main id="main">
 @yield('main-layout')
 </main><!-- End #main -->

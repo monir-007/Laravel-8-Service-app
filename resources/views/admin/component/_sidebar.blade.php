@@ -2,7 +2,7 @@
     <div id="sidebar" class="sidebar sidebar-with-footer">
         <!-- Aplication Brand -->
         <div class="app-brand">
-            <a href="/index.html">
+            <a href="/dashboard">
                 <svg
                     class="brand-icon"
                     xmlns="http://www.w3.org/2000/svg"
@@ -62,6 +62,29 @@
                             <li>
                                 <a class="sidenav-item-link" href="{{route('index.services')}}">
                                     <span class="nav-text">Services</span>
+                                </a>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
+                       data-target="#charts"
+                       aria-expanded="false" aria-controls="charts">
+                        <i class="mdi mdi-chart-pie"></i>
+                        <span class="nav-text">Contact</span> <b class="caret"></b>
+                    </a>
+                    <ul class="collapse" id="charts"
+                        data-parent="#sidebar-menu">
+                        <div class="sub-menu">
+                            <li>
+                                <a class="sidenav-item-link" href="{{route('index.contact')}}">
+                                    <span class="nav-text">Contact Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="sidenav-item-link" href="{{route('contactMessage')}}">
+                                    <span class="nav-text">Contact Message</span>
                                 </a>
                             </li>
                         </div>
