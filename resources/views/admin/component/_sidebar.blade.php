@@ -59,6 +59,11 @@
                                     <span class="nav-text">About Us </span>
                                 </a>
                             </li>
+                            <li>
+                                <a class="sidenav-item-link" href="{{route('index.services')}}">
+                                    <span class="nav-text">Services</span>
+                                </a>
+                            </li>
                         </div>
                     </ul>
                 </li>

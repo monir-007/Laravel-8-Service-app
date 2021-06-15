@@ -5,9 +5,11 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MultiImageController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SliderController;
 use App\Models\AboutUs;
 use App\Models\Brand;
+use App\Models\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $brands = Brand::all();
     $abouts= AboutUs::first();
-    return view('index', compact('brands','abouts'));
+    $services=Services::all();
+    return view('index', compact('brands','abouts', 'services'));
 });
 
 //Category Routes
@@ -61,6 +64,14 @@ Route::post('/about-us/new', [AboutUsController::class, 'saveNew'])->name('save.
 Route::get('/about-us/edit/{id}', [AboutUsController::class, 'edit']);
 Route::post('/about-us/update/{id}', [AboutUsController::class, 'update']);
 Route::get('/about-us/delete/{id}', [AboutUsController::class, 'delete']);
+
+//Services Routes
+Route::get('services/',[ServicesController::class, 'index'])->name('index.services');
+Route::post('services/new',[ServicesController::class, 'saveNew'])->name('save.services');
+Route::get('/services/edit/{id}', [ServicesController::class, 'edit']);
+Route::post('/services/update/{id}', [ServicesController::class, 'update']);
+Route::get('/services/delete/{id}', [ServicesController::class, 'delete']);
+
 
 //dashboard login route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
