@@ -20,7 +20,12 @@ class ServicesController extends Controller
             'description' => $request->description,
             'created_at' => Carbon::now(),
         ]);
-        return redirect()->route('index.services')->with('success', 'Services Inserted.');
+
+        $notification=array(
+            'message'=>'Service Inserted.',
+            'alert-type'=> 'success'
+        );
+        return redirect()->route('index.services')->with($notification);
     }
     public function edit($id)
     {
@@ -35,13 +40,22 @@ class ServicesController extends Controller
             'description' => $request->description,
             'created_at' => Carbon::now(),
         ]);
-        return redirect()->route('index.services')->with('success', 'Services Updated.');
+        $notification=array(
+            'message'=>'Service Updated.',
+            'alert-type'=> 'success'
+        );
+        return redirect()->route('index.services')->with($notification);
     }
 
     public function delete($id)
     {
         Services::find($id)->Delete();
-        return redirect()->back()->with('success', 'Services Deleted.');
+
+        $notification=array(
+            'message'=>'Service deleted.',
+            'alert-type'=> 'error'
+        );
+        return redirect()->back()->with($notification);
 
     }
 }

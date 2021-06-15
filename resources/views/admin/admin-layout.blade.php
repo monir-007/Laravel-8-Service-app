@@ -23,19 +23,16 @@
 
     <!-- SLEEK CSS -->
     <link id="sleek-css" rel="stylesheet" href="{{asset('admin/assets/css/sleek.css')}}"/>
-
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- FAVICON -->
     <link href="{{asset('admin/assets/img/favicon.png')}}" rel="shortcut icon"/>
 
-    <!--
-      HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-    -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
     <script src="{{asset('admin/assets/plugins/nprogress/nprogress.js')}}"></script>
 </head>
 
@@ -55,7 +52,7 @@
 ——— LEFT SIDEBAR WITH FOOTER
 =====================================
 -->
-@include('admin.component._sidebar')
+    @include('admin.component._sidebar')
 
 
     <div class="page-wrapper">
@@ -115,7 +112,28 @@
 <script src="{{asset('admin/assets/js/date-range.js')}}"></script>
 <script src="{{asset('admin/assets/js/map.js')}}"></script>
 <script src="{{asset('admin/assets/js/custom.js')}}"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    @if(Session::has('message'))
+    const type = "{{ Session::get('alert-type','success') }}";
+    switch (type) {
+        case 'info':
+            toastr.info("{{Session::get('message')}}");
+            break;
+        case 'success':
+            toastr.success("{{Session::get('message')}}");
+            break;
+        case 'warning':
+            toastr.warning("{{Session::get('message')}}");
+            break;
+        case 'error':
+            toastr.error("{{Session::get('message')}}");
+            break;
+    }
+    @endif
+</script>
 
 </body>
 </html>

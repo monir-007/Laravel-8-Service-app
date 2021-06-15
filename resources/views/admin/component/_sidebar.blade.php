@@ -45,7 +45,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="sidenav-item-link" href="analytics.html">
+                                <a class="sidenav-item-link" href="{{route('index.category')}}">
                                     <span class="nav-text">Category</span>
                                 </a>
                             </li>

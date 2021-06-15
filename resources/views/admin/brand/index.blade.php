@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header text-secondary bg-warning">
+                            <div class="card-header text-light bg-warning ">
                                 All Brands
                             </div>
                             <div class="card-body">
@@ -50,22 +50,14 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                {{ $brands->links() }}
+                                <div class="pagination pagination-seperated ">
+                                    {{ $brands->links() }}
+                                </div>
+
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        @if(session('success'))
-                            <div class="alert alert-success alert-dismissible fade show"
-                                 role="alert">
-                                <strong>{{ session('success') }}</strong>
-                                <button type="button" class="close" data-dismiss="alert"
-                                        aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
-
                         <div class="card">
                             <div class="card-header bg-secondary text-light">
                                 Add Brand
@@ -91,13 +83,9 @@
                                     <button type="submit" class="mt-2 btn btn-primary">Add</button>
                                 </form>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
         </div>
     </div>

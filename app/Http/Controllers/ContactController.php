@@ -11,7 +11,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::latest()->get();
         return view('admin.contact.index', compact('contacts'));
     }
 
@@ -23,7 +23,12 @@ class ContactController extends Controller
             'address' => $request->address,
             'created_at' => Carbon::now()
         ]);
-        return redirect()->route('index.contact')->with('success', 'Contact Inserted.');
+
+        $notification=array(
+            'message'=>'Contact Inserted.',
+            'alert-type'=> 'success'
+        );
+        return redirect()->route('index.contact')->with($notification);
     }
 
     public function edit($id)
@@ -40,19 +45,29 @@ class ContactController extends Controller
             'address' => $request->address,
             'created_at' => Carbon::now()
         ]);
-        return redirect()->route('index.contact')->with('success', 'Contact Updated.');
+
+        $notification=array(
+            'message'=>'Contact Updated.',
+            'alert-type'=> 'success'
+        );
+        return redirect()->route('index.contact')->with($notification);
     }
 
     public function delete($id)
     {
         Contact::find($id)->Delete();
-        return redirect()->back()->with('success', 'Contact Deleted.');
+
+        $notification=array(
+            'message'=>'Contact Deleted.',
+            'alert-type'=> 'error'
+        );
+        return redirect()->back()->with($notification);
 
     }
 
     public function viewContact()
     {
-        $contactDetails = Contact::first();
+        $contactDetails = Contact::latest()->first();
         return view('pages.contact.index', compact('contactDetails'));
     }
 
@@ -65,7 +80,12 @@ class ContactController extends Controller
             'message' => $request->message,
             'created_at' => Carbon::now()
         ]);
-        return redirect()->route('contact')->with('success', 'Message Sent.');
+
+        $notification=array(
+            'message'=>'Message Sent.',
+            'alert-type'=> 'success'
+        );
+        return redirect()->route('contact')->with($notification);
     }
 
     public function message()
@@ -77,7 +97,13 @@ class ContactController extends Controller
     public function deleteMessage($id)
     {
         ContactForm::find($id)->Delete();
-        return redirect()->back()->with('success', 'Message Deleted.');
+
+        $notification=array(
+            'message'=>'Message Deleted.',
+            'alert-type'=> 'error'
+        );
+        return redirect()->back()->with($notification);
 
     }
+
 }

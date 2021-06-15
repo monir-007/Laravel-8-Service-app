@@ -11,32 +11,38 @@ class SliderController extends Controller
 {
     public function index()
     {
-        $sliders = Slider::latest()->get();
+        $sliders = Slider::latest()->paginate(2);
         return view('admin.slider.index', compact('sliders'));
     }
 
     public function saveNew(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'title' => 'required',
-            'description'=>'required',
+            'description' => 'required',
             'image' => 'required|mimes:jpg,jpeg,png',
         ]);
 
         $slider_image = $request->file('image');
 
-        $name_gen = hexdec(uniqid()).'.'.$slider_image->getClientOriginalExtension();
-        Image::make($slider_image)->resize(1920, 1088)->save('image/slider/'.$name_gen);
-        $last_image = 'image/slider/'.$name_gen;
+        $name_gen = hexdec(uniqid()) . '.' . $slider_image->getClientOriginalExtension();
+        Image::make($slider_image)->resize(1920, 1088)->save('image/slider/' . $name_gen);
+        $last_image = 'image/slider/' . $name_gen;
 
         $slider = new Slider();
         $slider->title = $request->title;
         $slider->description = $request->description;
-        $slider->image=$last_image;
+        $slider->image = $last_image;
         $slider->save();
-        return redirect()->route('index.slider')->with('success', 'Slider created successfully!');
+
+        $notification = array(
+            'message' => 'Slider created successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('index.slider')->with($notification);
 
     }
+
     public function edit($id)
     {
         $sliders = Slider::find($id);
@@ -45,7 +51,7 @@ class SliderController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'title' => 'required',
             'image' => 'required|mimes:jpg,jpeg,png',
         ]);
@@ -63,27 +69,42 @@ class SliderController extends Controller
             unlink($old_image);
 
             Slider::find($id)->update([
-                'title'=>$request->title,
-                'description'=>$request->description,
-                'image'=>$last_image,
-                'created_at'=>Carbon::now()
+                'title' => $request->title,
+                'description' => $request->description,
+                'image' => $last_image,
+                'created_at' => Carbon::now()
             ]);
-            return redirect()->route('index.slider')->with('success', 'Slider updated successfully!');
+            $notification = array(
+                'message' => 'Slider updated successfully!',
+                'alert-type' => 'info'
+            );
+            return redirect()->route('index.slider')->with($notification);
 
         }
         Slider::find($id)->update([
-            'title'=>$request->title,
-            'description'=>$request->description,
+            'title' => $request->title,
+            'description' => $request->description,
             'updated_at' => Carbon::now()
         ]);
-        return redirect()->route('index.slider')->with('success', 'Slider updated successfully!');
+
+        $notification = array(
+            'message' => 'Slider updated successfully!',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('index.slider')->with($notification);
     }
-    public function delete($id){
+
+    public function delete($id)
+    {
         $data = Slider::find($id);
         $oldImage = $data->image;
         unlink($oldImage);
 
         Slider::find($id)->delete();
-        return redirect()->back()->with('success', 'Slider deleted successfully.');
+        $notification = array(
+            'message' => 'Slider updated successfully!',
+            'alert-type' => 'error'
+        );
+        return redirect()->back()->with($notification);
     }
 }

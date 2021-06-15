@@ -20,14 +20,6 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card bg-light">
-                            @if(session('success'))
-                                <div class="col-md-6 alert alert-success alert-dismissible fade show" role="alert">
-                                    <strong>{{session('success')}}</strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            @endif
                             <div class="card-body">
                                 <table id="dataTable" class="table table-striped table-fixed">
                                     <thead>
@@ -86,6 +78,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                <div class="pagination pagination-seperated">
+                                    {{ $sliders->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -170,24 +165,24 @@
 
 @endsection
 
-<script type="text/javascript">
-    $(document).ready(function (){
-        var table = $('#dataTable').DataTable();
-        table.on('click', '.edit', function (){
-            let $tr = $(this).closest('tr');
-            if($($tr).hasClass('child')){
-                $tr = $tr.prev('.parent');
-            }
-            let data = table.row($tr).data();
-            console.log(data);
+{{--<script type="text/javascript">--}}
+{{--    $(document).ready(function (){--}}
+{{--        var table = $('#dataTable').DataTable();--}}
+{{--        table.on('click', '.edit', function (){--}}
+{{--            let $tr = $(this).closest('tr');--}}
+{{--            if($($tr).hasClass('child')){--}}
+{{--                $tr = $tr.prev('.parent');--}}
+{{--            }--}}
+{{--            let data = table.row($tr).data();--}}
+{{--            console.log(data);--}}
 
-            $('#title').val(data[1]);
-            $('#description').val(data[2]);
-            $('#image').val(data[3]);
+{{--            $('#title').val(data[1]);--}}
+{{--            $('#description').val(data[2]);--}}
+{{--            $('#image').val(data[3]);--}}
 
-            $('#editForm').attr('action','slider/update'+data[0]);
-            $('#sliderEditModal').modal('show');
-        });
-    });
+{{--            $('#editForm').attr('action','slider/update'+data[0]);--}}
+{{--            $('#sliderEditModal').modal('show');--}}
+{{--        });--}}
+{{--    });--}}
 
-</script>
+{{--</script>--}}

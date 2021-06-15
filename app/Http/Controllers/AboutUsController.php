@@ -22,7 +22,13 @@ class AboutUsController extends Controller
             'description' => $request->description,
             'created_at' => Carbon::now(),
         ]);
-        return redirect()->route('index.aboutUs')->with('success', 'About Us Inserted.');
+
+        $notification=array(
+            'message'=>'About Us Inserted.',
+            'alert-type'=> 'success'
+        );
+
+        return redirect()->route('index.aboutUs')->with($notification);
     }
 
     public function edit($id)
@@ -40,13 +46,21 @@ class AboutUsController extends Controller
             'created_at' => Carbon::now(),
 
         ]);
-        return redirect()->route('index.aboutUs')->with('success', 'About Us Updated.');
+        $notification=array(
+            'message'=>'About Us Updated.',
+            'alert-type'=> 'success'
+        );
+        return redirect()->route('index.aboutUs')->with($notification);
     }
 
     public function delete($id)
     {
         AboutUs::find($id)->Delete();
-        return redirect()->back()->with('success', 'About Us Deleted.');
+        $notification=array(
+            'message'=>'About Us deleted.',
+            'alert-type'=> 'error'
+        );
+        return redirect()->back()->with($notification);
 
     }
 }

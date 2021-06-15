@@ -12,6 +12,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SliderController;
 use App\Models\AboutUs;
 use App\Models\Brand;
+use App\Models\Contact;
 use App\Models\MultiImage;
 use App\Models\Services;
 use App\Models\User;
@@ -30,10 +31,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $brands = Brand::all();
-    $abouts= AboutUs::first();
+    $abouts= AboutUs::latest()->first();
     $services=Services::all();
     $images=MultiImage::all();
-    return view('index', compact('brands','abouts', 'services', 'images'));
+    $contactDetails = Contact::latest()->first();
+    return view('index', compact('brands','abouts', 'services', 'images','contactDetails'));
 });
 
 //Category Routes

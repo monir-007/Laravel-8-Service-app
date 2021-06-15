@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('admin.admin-layout')
+
+@section('admin-layout')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             All Category
@@ -51,21 +53,14 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                {{ $categories->links() }}
+                                <div class="pagination pagination-seperated pagination-seperated-rounded">
+                                    {!! $categories->links() !!}
+                                </div>
+
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        @if(session('success'))
-                            <div class="alert alert-success alert-dismissible fade show"
-                                 role="alert">
-                                <strong>{{ session('success') }}</strong>
-                                <button type="button" class="close" data-dismiss="alert"
-                                        aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
                         <div class="card">
                             <div class="card-header bg-secondary text-light">
                                 Add Category
@@ -92,7 +87,7 @@
 
 {{--                Delete Section--}}
                 <div class="row mt-3">
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                         <div class="card">
                             <div class="card-header text-light bg-danger">
                                 Trash Category
@@ -134,7 +129,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                {{ $deleteCategories->links() }}
+                                <div class="pagination pagination-seperated pagination-seperated-rounded">
+                                    {{ $deleteCategories->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -144,4 +141,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

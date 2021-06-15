@@ -58,16 +58,6 @@
             <div class="row">
 
                 <div class="col-md-12">
-                    @if(session('success'))
-                    <div class=" alert alert-success alert-dismissible fade show"
-                role="alert">
-                <strong>{{ session('success') }}</strong>
-                <button type="button" class="close" data-dismiss="alert"
-                        aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @endif
             <div class="card">
                 <div class="card-header bg-secondary text-light">
                     Edit Slider
@@ -87,8 +77,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <textarea name="description" value="{{ $sliders->description }}" id="" cols="15" rows="5"
-                                      class="form-control"></textarea>
+                            <textarea name="description"  id="" cols="15" rows="5"
+                                      class="form-control">{{ $sliders->description }}</textarea>
 
                             @error('description')
                             <span class="text-danger">*{{ $message }}</span>
