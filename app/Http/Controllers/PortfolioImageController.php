@@ -6,7 +6,7 @@ use App\Models\MultiImage;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
-class MultiImageController extends Controller
+class PortfolioImageController extends Controller
 {
     public function __construct()
     {
@@ -16,7 +16,7 @@ class MultiImageController extends Controller
     public function index()
     {
         $images = MultiImage::all();
-        return view('admin.multiple-image.index', compact('images'));
+        return view('admin.portfolio-image.index', compact('images'));
     }
 
     public function save(Request $request)
@@ -32,6 +32,11 @@ class MultiImageController extends Controller
         $multiImage->image=$lastImage;
         $multiImage->save();
         }
-        return redirect()->back()->with('success', 'Multiple image uploaded ');
+
+        $notification = array(
+            'message' => 'Portfolio Image Uploaded',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
 }

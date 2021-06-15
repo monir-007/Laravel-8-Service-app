@@ -30,9 +30,18 @@ class UpdateProfileController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
             Auth::logout();
-            return redirect()->route('login')->with('success', 'Password Changed Successfully');
+
+            $notification = array(
+                'message' => 'Password Changed Successfully',
+                'alert-type' => 'warning'
+            );
+            return redirect()->route('login')->with($notification);
         }
-        return redirect()->route('login')->with('success', 'Password is invalid');
+        $notification = array(
+            'message' => 'Password is invalid',
+            'alert-type' => 'error'
+        );
+        return redirect()->route('login')->with($notification);
     }
 
     public function updateProfile()
@@ -52,8 +61,17 @@ class UpdateProfileController extends Controller
             $user->name=$request['name'];
             $user->email=$request['email'];
             $user->save();
-            return redirect()->back()->with('success','User information updated. ');
+
+            $notification = array(
+                'message' => 'User information updated.',
+                'alert-type' => 'warning'
+            );
+            return redirect()->back()->with($notification);
         }
-        return redirect()->back();
+        $notification = array(
+            'message' => 'User information invalid.',
+            'alert-type' => 'error'
+        );
+        return redirect()->back()->with($notification);
     }
 }

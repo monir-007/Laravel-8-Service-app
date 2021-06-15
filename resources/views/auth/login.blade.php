@@ -25,15 +25,13 @@
         <!-- SLEEK CSS -->
         <link id="sleek-css" rel="stylesheet" href="{{asset('admin/assets/css/sleek.css')}}"/>
 
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
 
         <!-- FAVICON -->
         <link href="{{asset('admin/assets/img/favicon.png')}}" rel="shortcut icon"/>
 
-        <!--
-          HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-        -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
@@ -48,7 +46,7 @@
             <div class="card">
                 <div class="card-header bg-primary">
                     <div class="app-brand">
-                        <a href="/index.html">
+                        <a href="/">
                             <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid"
                                  width="30" height="33"
                                  viewBox="0 0 30 33">
@@ -61,14 +59,6 @@
                         </a>
                     </div>
                 </div>
-                @if(session('success'))
-                    <div class="col-md-12 alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{session('success')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
                 <div class="card-body p-5">
                     <h4 class="text-dark mb-5">Sign In</h4>
                     <form method="POST" action="{{ route('login') }}">
@@ -84,13 +74,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="d-flex my-2 justify-content-between">
-                                    <div class="d-inline-block mr-3">
-                                        <label class="control control-checkbox">Remember me
-                                            <input type="checkbox"/>
-                                            <div class="control-indicator"></div>
-                                        </label>
 
-                                    </div>
                                     <p><a class="text-blue" href="{{ route('password.request') }}">Forgot Your
                                             Password?</a></p>
                                 </div>
@@ -105,11 +89,29 @@
             </div>
         </div>
     </div>
-    <div class="copyright pl-0">
-        <p class="text-center">&copy; 2021@Copyright Sleek Dashboard Bootstrap Template by
-            <a class="text-primary" href="https://github.com/monir-007" target="_blank">Monir</a>.
-        </p>
-    </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    @if(Session::has('message'))
+    const type = "{{ Session::get('alert-type','success') }}";
+    switch (type) {
+        case 'info':
+            toastr.info("{{Session::get('message')}}");
+            break;
+        case 'success':
+            toastr.success("{{Session::get('message')}}");
+            break;
+        case 'warning':
+            toastr.warning("{{Session::get('message')}}");
+            break;
+        case 'error':
+            toastr.error("{{Session::get('message')}}");
+            break;
+    }
+    @endif
+</script>
 </body>
 </html>

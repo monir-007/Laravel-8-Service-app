@@ -6,7 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\admin\UpdateProfileController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\MultiImageController;
+use App\Http\Controllers\PortfolioImageController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SliderController;
@@ -55,8 +55,8 @@ Route::post('/brand/update/{id}', [BrandController::class, 'update']);
 Route::get('/brand/delete/{id}', [BrandController::class, 'delete']);
 
 //Multi-Image Routes
-Route::get('/multiple/image/', [MultiImageController::class, 'index'])->name('index.multiImage');
-Route::post('/multiple/image/save', [MultiImageController::class, 'save'])->name('save.multiImage');
+Route::get('/portfolio/image/', [PortfolioImageController::class, 'index'])->name('index.portfolio');
+Route::post('/portfolio/image/save', [PortfolioImageController::class, 'save'])->name('save.portfolio');
 
 //Slider Routes
 Route::get('/slider/', [SliderController::class, 'index'])->name('index.slider');

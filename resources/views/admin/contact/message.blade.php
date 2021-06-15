@@ -55,6 +55,9 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+                                <div class="pagination pagination-seperated">
+                                    {{ $messages->links() }}
+                                </div>
                             </div>
                         </div>
                     </div>

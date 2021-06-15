@@ -90,7 +90,7 @@ class ContactController extends Controller
 
     public function message()
     {
-        $messages = ContactForm::all();
+        $messages = ContactForm::latest()->paginate(4);
         return view('admin.contact.message', compact('messages'));
     }
 

@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('admin.admin-layout')
+
+@section('admin-layout')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Images
@@ -23,23 +25,12 @@
 
                     </div>
                     <div class="col-md-4">
-                        @if(session('success'))
-                            <div class="alert alert-success alert-dismissible fade show"
-                                 role="alert">
-                                <strong>{{ session('success') }}</strong>
-                                <button type="button" class="close" data-dismiss="alert"
-                                        aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
-
                         <div class="card">
                             <div class="card-header bg-secondary text-light">
                                 Add Images
                             </div>
                             <div class="card-body">
-                                <form action="{{ route('save.multiImage') }}" method="POST"
+                                <form action="{{ route('save.portfolio') }}" method="POST"
                                       enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
@@ -62,4 +53,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

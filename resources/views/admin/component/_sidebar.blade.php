@@ -64,6 +64,11 @@
                                     <span class="nav-text">Services</span>
                                 </a>
                             </li>
+                            <li>
+                                <a class="sidenav-item-link" href="{{route('index.portfolio')}}">
+                                    <span class="nav-text">Portfolio</span>
+                                </a>
+                            </li>
                         </div>
                     </ul>
                 </li>

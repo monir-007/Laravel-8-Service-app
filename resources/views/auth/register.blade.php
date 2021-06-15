@@ -24,16 +24,12 @@
         <!-- SLEEK CSS -->
         <link id="sleek-css" rel="stylesheet" href="{{asset('admin/assets/css/sleek.css')}}" />
 
-
+        <link rel="stylesheet" type="text/css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
         <!-- FAVICON -->
         <link href="assets/img/favicon.png" rel="{{asset('admin/shortcut icon')}}" />
 
-        <!--
-          HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-        -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
@@ -78,14 +74,6 @@
                                 <input name="password_confirmation" type="password" class="form-control input-lg" placeholder="Confirm Password">
                             </div>
                             <div class="col-md-12">
-                                <div class="d-inline-block mr-3">
-                                    <label class="control control-checkbox">
-                                        <input type="checkbox" />
-                                        <div class="control-indicator"></div>
-                                        I Agree the terms and conditions
-                                    </label>
-
-                                </div>
                                 <button type="submit" class="btn btn-lg btn-primary btn-block mb-4">Sign Up</button>
                                 <p>Already have an account?
                                     <a class="text-blue" href="{{ route('login') }}">Sign in</a>
@@ -98,11 +86,28 @@
             </div>
         </div>
     </div>
-    <div class="copyright pl-0">
-        <p class="text-center">&copy; 2021@Copyright Admin Dashboard Bootstrap Template by
-            <a class="text-primary" href="https://github.com/monir-007" target="_blank">Monir</a>.
-        </p>
-    </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    @if(Session::has('message'))
+    const type = "{{ Session::get('alert-type','success') }}";
+    switch (type) {
+        case 'info':
+            toastr.info("{{Session::get('message')}}");
+            break;
+        case 'success':
+            toastr.success("{{Session::get('message')}}");
+            break;
+        case 'warning':
+            toastr.warning("{{Session::get('message')}}");
+            break;
+        case 'error':
+            toastr.error("{{Session::get('message')}}");
+            break;
+    }
+    @endif
+</script>
 </body>
 </html>
