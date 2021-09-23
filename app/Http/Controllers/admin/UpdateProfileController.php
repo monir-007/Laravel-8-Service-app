@@ -22,8 +22,8 @@ class UpdateProfileController extends Controller
         $validateData = $request->validate([
             'oldPassword' => 'required',
             'password' => 'required|confirmed',
-
         ]);
+
         $hashedPassword = Auth::user()->password;
         if (Hash::check($request->oldPassword, $hashedPassword)) {
             $user = User::find(Auth::id());
