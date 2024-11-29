@@ -31,7 +31,12 @@ class CategoryController extends Controller
         $category->user_id = Auth::user()->id;
         $category->save();
 
-        return redirect()->back()->with('success', 'Category created successfully!');
+        $notification=array(
+            'message'=>'Category created successfully!',
+            'alert-type'=> 'success'
+        );
+
+        return redirect()->back()->with($notification);
     }
 
     public function edit($id)
@@ -47,26 +52,44 @@ class CategoryController extends Controller
             'user_id' => Auth::user()->id
         ]);
 
-        return redirect()->route('index.category')->with('success', 'Category updated successfully!');
+        $notification=array(
+            'message'=>'Category updated successfully!',
+            'alert-type'=> 'success'
+        );
+        return redirect()->route('index.category')->with($notification);
     }
 
     public function softDelete($id)
     {
         $delete = Category::find($id)->delete();
-        return redirect()->back()->with('success', 'Delete Successfully');
+
+        $notification=array(
+            'message'=>'Deleted Successfully',
+            'alert-type'=> 'warning'
+        );
+        return redirect()->back()->with($notification);
     }
 
     public function restoreCategory($id)
     {
         $delete = Category::withTrashed()->find($id)->restore();
 
-        return redirect()->back()->with('success', 'Data restored');
+        $notification=array(
+            'message'=>'Data restored',
+            'alert-type'=> 'warning'
+        );
+        return redirect()->back()->with($notification);
     }
 
     public function deleteCategory($id)
     {
         $delete = Category::onlyTrashed()->find($id)->forceDelete();
 
-        return redirect()->back()->with('success', 'Category deleted Permanently');
+        $notification=array(
+            'message'=>'Category deleted Permanently',
+            'alert-type'=> 'error'
+        );
+
+        return redirect()->back()->with($notification);
     }
 }
